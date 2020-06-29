@@ -1,3 +1,4 @@
 xmltodict
 pandas
 requests
+inquirer

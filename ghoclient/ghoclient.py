@@ -30,11 +30,13 @@ class GHOSession:
                 attributes.extend([d for d in v])
         return attributes
 
-    def get_dimensions(self):
+    def get_dimensions(self, format='dataframe'):
         dimensions = []
         for k, v in self.data['GHO']['Metadata'].items():
             if k == 'Dimension':
                 dimensions.extend([d for d in v])
+        if format == 'dataframe':
+            return pd.DataFrame(dimensions)
         return dimensions
 
     def get_region_codes(self):
@@ -57,6 +59,23 @@ class GHOSession:
         elif format == 'full':
             return data['GHO']['Metadata']['Dimension']['Code']
         return data
+
+    def fetch_data_from_codes(self, code=None, like='MALARIA'):
+        """
+        Fetches data for a specific indicator code or a list of indicators matching the substring in `like`
+        :param code: Indicator code to fetch (for a full list of available codes use `get_data_codes` method.)
+        :param like: substring of the codes desired
+        :return: Dataframe with table.
+        """
+        url = BASE_URL + 'GHO/'
+        if code is None:
+            codes = [c for c in self.get_data_codes(format='label') if like.lower() in c.lower()]
+        url += ','.join(codes)
+        url += '&format=csv' if '?' in url else '?format=csv'
+        data = pd.read_csv(url)
+        # data = requests.get(url)
+        return data
+
 
 
     def _fetch_data_as_dict(self, url):
@@ -94,4 +113,5 @@ if __name__ == "__main__":
     # pprint(GC.get_data_codes(format='label'))
 
     # pprint(GC.get_region_codes())
-    print(GC.get_countries())
+    # print(GC.get_countries())
+    pprint(GC.fetch_data_from_codes())

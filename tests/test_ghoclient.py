@@ -34,7 +34,13 @@ class TestGhoclient(unittest.TestCase):
 
 
 class TestGHO(unittest.TestCase):
-    def test_get_countries(self):
+    def test_get_countries_as_df(self):
         GC = ghoclient.GHOSession()
         df = GC.get_countries()
         self.assertIsInstance(df, pd.DataFrame)
+
+    def test_get_dimensions_as_df(self):
+        GC = ghoclient.GHOSession()
+        df = GC.get_dimensions()
+        self.assertIsInstance(df, pd.DataFrame)
+        self.assertEquals(len(df.columns), 3)
