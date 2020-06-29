@@ -2,12 +2,12 @@
 
 """Tests for `ghoclient` package."""
 
-
 import unittest
 from click.testing import CliRunner
 
 from ghoclient import ghoclient
 from ghoclient import cli
+import pandas as pd
 
 
 class TestGhoclient(unittest.TestCase):
@@ -31,3 +31,10 @@ class TestGhoclient(unittest.TestCase):
         help_result = runner.invoke(cli.main, ['--help'])
         assert help_result.exit_code == 0
         assert '--help  Show this message and exit.' in help_result.output
+
+
+class TestGHO(unittest.TestCase):
+    def test_get_countries(self):
+        GC = ghoclient.GHOSession()
+        df = GC.get_countries()
+        self.assertIsInstance(df, pd.DataFrame)
