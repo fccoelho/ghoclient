@@ -2,7 +2,6 @@
 GHOclient
 =========
 
-
 .. image:: https://img.shields.io/pypi/v/ghoclient.svg
         :target: https://pypi.python.org/pypi/ghoclient
 

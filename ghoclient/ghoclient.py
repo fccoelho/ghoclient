@@ -87,7 +87,7 @@ class GHOSession:
         data = xmltodict.parse(resp.text)
         return data
 
-    def get_data_codes(self, format='full'):
+    def get_data_codes(self, format='dataframe'):
         """
         Get Codes That
         :param format: either 'full', 'label' or 'url'
@@ -98,6 +98,8 @@ class GHOSession:
         # codes = [d for d in data['GHO']['Metadata']['Dimension']['Code']]
         if format == 'full':
             return [d for d in data['GHO']['Metadata']['Dimension']['Code']]
+        if format == 'dataframe':
+            return pd.DataFrame([d for d in data['GHO']['Metadata']['Dimension']['Code']])
         elif format == 'label':
             return [d['@Label'] for d in data['GHO']['Metadata']['Dimension']['Code']]
         elif format == 'url':
@@ -110,8 +112,8 @@ if __name__ == "__main__":
     # print(len(GC.get_available_datasets()))
     # pprint(GC.get_attributes())
     # pprint(GC.get_dimensions())
-    # pprint(GC.get_data_codes(format='label'))
+    pprint(GC.get_data_codes(format='dataframe'))
 
     # pprint(GC.get_region_codes())
     # print(GC.get_countries())
-    pprint(GC.fetch_data_from_codes())
+    # pprint(GC.fetch_data_from_codes())
