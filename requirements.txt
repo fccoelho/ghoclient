@@ -2,3 +2,4 @@ xmltodict
 pandas
 requests
 inquirer
+tox-travis
