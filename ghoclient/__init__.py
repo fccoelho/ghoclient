@@ -3,3 +3,6 @@
 __author__ = """Flávio Codeço Coelho"""
 __email__ = 'fccoelho@gmail.com'
 __version__ = '0.1.0'
+
+from .ghoclient import GHOSession
+
