@@ -8,7 +8,7 @@ Welcome to GHOclient's documentation!
    readme
    installation
    usage
-   modules
+   Example Notebook <GHO_data.ipynb>
    contributing
    authors
    history

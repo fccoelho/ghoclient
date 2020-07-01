@@ -70,6 +70,12 @@ class GHOSession:
         url = BASE_URL + 'GHO/'
         if code is None:
             codes = [c for c in self.get_data_codes(format='label') if like.lower() in c.lower()]
+        
+        elif isinstance(code, (list, tuple)):
+            codes = list(code)
+        elif isinstance(code, str):
+            codes=[code]
+                
         url += ','.join(codes)
         url += '&format=csv' if '?' in url else '?format=csv'
         data = pd.read_csv(url)
