@@ -4,3 +4,4 @@ requests
 inquirer
 tox-travis
 click
+whoosh

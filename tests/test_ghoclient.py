@@ -5,9 +5,11 @@
 import unittest
 from click.testing import CliRunner
 
-from ghoclient import ghoclient
+import ghoclient
 from ghoclient import cli
+from ghoclient import Index
 import pandas as pd
+from whoosh.searching import Hit
 
 
 class TestGhoclient(unittest.TestCase):
@@ -35,12 +37,24 @@ class TestGhoclient(unittest.TestCase):
 
 class TestGHO(unittest.TestCase):
     def test_get_countries_as_df(self):
-        GC = ghoclient.GHOSession()
+        GC = ghoclient.ghoclient.GHOSession()
         df = GC.get_countries()
         self.assertIsInstance(df, pd.DataFrame)
 
     def test_get_dimensions_as_df(self):
-        GC = ghoclient.GHOSession()
+        GC = ghoclient.ghoclient.GHOSession()
         df = GC.get_dimensions()
         self.assertIsInstance(df, pd.DataFrame)
         self.assertEquals(len(df.columns), 3)
+
+
+class Test_Index(unittest.TestCase):
+    def test_build_index(self):
+        ghoclient.index.build_index(None)
+        assert ghoclient.index.ix is not None 
+        
+    def test_search(self):
+        res = ghoclient.index.search('tuberculosis')
+        self.assertGreaterEqual(len(res), 0)
+        self.assertIsInstance(res[0], dict)
+        self.assertIn('code', res[0])
