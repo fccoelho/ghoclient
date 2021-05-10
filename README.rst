@@ -2,7 +2,7 @@
 GHOclient
 =========
 .. |Generic badge| image:: https://github.com/fccoelho/ghoclient/actions/workflows/python-package.yml/badge.svg
-:target: https://github.com/fccoelho/ghoclient
+   :target: https://github.com/fccoelho/ghoclient
 
 
 Introduction
