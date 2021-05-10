@@ -1,4 +1,3 @@
-=========
 GHOclient
 =========
 
@@ -7,7 +6,8 @@ GHOclient
 
 
 Introduction
-============
+------------
+
 The WHO `Global Health Observatory`_ is a large global health data repository that makes available an enormous collection  of indicators_ which can be downloaded through their API_. GHOclient is a Python client which helps data scientists search and access their data programmatically.
 
 
