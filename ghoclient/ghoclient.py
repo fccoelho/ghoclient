@@ -52,8 +52,9 @@ class GHOSession:
             lines = []
             for d in data['GHO']['Metadata']['Dimension']['Code']:
                 rec = {k: v for k, v in d.items() if k != 'Attr'}
-                for attr in d['Attr']:
-                    rec[attr['@Category']] = attr['Value']['Display']
+                if 'Attr' in d:
+                    for attr in d['Attr']:
+                        rec[attr['@Category']] = attr['Value']['Display']
                 lines.append(rec)
             return pd.DataFrame(lines)
         elif format == 'full':

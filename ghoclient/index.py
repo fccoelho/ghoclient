@@ -4,7 +4,7 @@ from whoosh.fields import *
 import os
 import copy
 
-schema = Schema(code=ID(stored=True), description=TEXT)
+schema = Schema(code=ID(stored=True), description=TEXT(stored=True))
 
 
 class Index:
