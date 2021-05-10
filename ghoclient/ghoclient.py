@@ -17,6 +17,15 @@ class GHOSession:
         self.data = xmltodict.parse(resp.text)
 
     def get_available_datasets(self):
+        '''
+        Check for available datasets
+
+        Returns 
+        -------
+        datasets : list
+            list of datasets.
+
+        '''
         datasets = []
         for k, v in self.data['GHO']['Metadata'].items():
             if k == 'Dataset':
@@ -24,6 +33,15 @@ class GHOSession:
         return datasets
 
     def get_attributes(self):
+        '''
+        Lists attributes used on datasets
+
+        Returns
+        -------
+        attributes : list
+            list of attributes represented as dictionaries.
+
+        '''
         attributes = []
         for k, v in self.data['GHO']['Metadata'].items():
             if k == 'Attribute':
@@ -31,6 +49,20 @@ class GHOSession:
         return attributes
 
     def get_dimensions(self, format='dataframe'):
+        '''
+        List dimensions of data
+
+        Parameters
+        ----------
+        format : str, output format, of `dataframe` (default) or `list`
+            DESCRIPTION. The default is 'dataframe'.
+
+        Returns
+        -------
+        dimensions: dataframe or list
+            description of every variable in the datasets and their dimension.
+
+        '''
         dimensions = []
         for k, v in self.data['GHO']['Metadata'].items():
             if k == 'Dimension':
@@ -40,12 +72,35 @@ class GHOSession:
         return dimensions
 
     def get_region_codes(self):
+        '''
+        Returns region codes
+
+        Returns
+        -------
+        regions : dictionary
+            Dictionary with code, description pairs.
+
+        '''
         url = BASE_URL + 'REGION'
         data = self._fetch_data_as_dict(url)
-        regions = [{c['@Label']: c['Display']} for c in data['GHO']['Metadata']['Dimension']['Code']]
+        regions = {c['@Label']: c['Display'] for c in data['GHO']['Metadata']['Dimension']['Code']}
         return regions
 
     def get_countries(self, format='dataframe'):
+        '''
+        Returns a dataframe with country codes and metadata
+
+        Parameters
+        ----------
+        format : str, optional
+            The default is 'dataframe'.
+
+        Returns list if `format` is full
+        -------
+        data: dataframe by default
+            country info.
+
+        '''
         url = BASE_URL + 'COUNTRY'
         data = self._fetch_data_as_dict(url)
         if format == 'dataframe':
@@ -96,9 +151,9 @@ class GHOSession:
 
     def get_data_codes(self, format='dataframe'):
         """
-        Get Codes That
+        Get Codes that can be fetched as indicators.
         :param format: either 'full', 'label' or 'url'
-        :return: list of dicts when format is full or a list of strings otherwise.
+        :return: list of dicts when `format` is 'full', a Dataframe when it is 'dataframe' or a list of strings otherwise.
         """
         url = BASE_URL + 'GHO'
         data = self._fetch_data_as_dict(url)

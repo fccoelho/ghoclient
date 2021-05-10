@@ -47,7 +47,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'GHOclient'
-copyright = "2020, Flávio Codeço Coelho"
+copyright = "2020-21, Flávio Codeço Coelho"
 author = "Flávio Codeço Coelho"
 
 # The version info for the project you're documenting, acts as replacement
