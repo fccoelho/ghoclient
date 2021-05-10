@@ -2,8 +2,8 @@
 GHOclient
 =========
 
-.. |Building| image:: https://github.com/fccoelho/ghoclient/actions/workflows/python-package.yml/badge.svg
-   :target: https://github.com/fccoelho/ghoclient
+.. image:: https://github.com/fccoelho/ghoclient/actions/workflows/python-package.yml/badge.svg
+.. image:: https://github.com/fccoelho/ghoclient/actions/workflows/python-publish.yml/badge.svg
 
 
 Introduction
