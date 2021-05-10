@@ -21,7 +21,10 @@ The WHO `Global Health Observatory`_ is a large global health data repository th
 Features
 --------
 
-* TODO
+* Search for indicators by keyword
+* Browse available datasets
+* List region and country codes
+* get the data as pandas Dataframes
 
 Credits
 -------
