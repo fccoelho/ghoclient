@@ -17,9 +17,12 @@ GHOclient
      :target: https://pyup.io/repos/github/fccoelho/ghoclient/
      :alt: Updates
 
+Introduction
+============
+The WHO Global Health observatory
 
+Python client to the WHO `Global Health Observatory`_.
 
-Python client to the WHO Global Health Observatory.
 
 
 * Free software: MIT license
@@ -38,3 +41,4 @@ This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypack
 
 .. _Cookiecutter: https://github.com/audreyr/cookiecutter
 .. _`audreyr/cookiecutter-pypackage`: https://github.com/audreyr/cookiecutter-pypackage
+.. _`Global Health Observatory`: https://www.who.int/data/gho
