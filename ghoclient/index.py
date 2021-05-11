@@ -28,7 +28,7 @@ class Index:
         with self.ix.searcher() as searcher:
             qp = QueryParser("description", schema=self.ix.schema)
             q = qp.parse(query)
-            results = searcher.search(q)
+            results = searcher.search(q, limit=10000)
             out  = [dict(h) for h in results]
         return out
         
