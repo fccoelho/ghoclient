@@ -26,6 +26,17 @@ Features
 * List region and country codes
 * get the data as pandas Dataframes
 
+Example usage
+-------------
+For example, to search for health data ona certain topic, like smoking
+
+.. code-block:: Python
+
+    import ghoclient
+    ghoclient.index.search('smoking')
+
+The above lines will fetch a Dataframe with all indicators containing the word smoking in their description.
+
 Credits
 -------
 

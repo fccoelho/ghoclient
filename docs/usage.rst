@@ -7,7 +7,11 @@ To use GHOclient in a project::
     import ghoclient
     GC = ghoclient.GHOSession()
 
-from this object a simple API is available to fetch data from the WHO's Global Health Observatory::
+Upon being imported for the first time, ghoclient creates a fulltext index of the description of all the indicators available. So you can search the observatory by keyword::
+
+    ghoclient.index.search('smoking')
+
+from the session object a simple API is available to fetch data from the WHO's Global Health Observatory::
 
     df = GC.fetch_data_from_codes(like='MALARIA')
     df.head()
