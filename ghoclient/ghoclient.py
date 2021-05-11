@@ -6,10 +6,15 @@ Provides a class with utility methods for fetching data from the Global Health O
 import xmltodict
 import pandas as pd
 import requests
+import io
 from pprint import pprint
 
 BASE_URL = 'http://apps.who.int/gho/athena/api/'
 
+header = {
+            "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.75 Safari/537.36",
+            "X-Requested-With": "XMLHttpRequest"
+        }
 
 class GHOSession:
     def __init__(self):
@@ -134,8 +139,10 @@ class GHOSession:
                 
         url += ','.join(codes)
         url += '&format=csv' if '?' in url else '?format=csv'
-        data = pd.read_csv(url)
-        # data = requests.get(url)
+        response = requests.get(url, headers=header)
+        file_object = io.StringIO(response.content.decode('utf-8'))
+        data = pd.read_csv(file_object)
+        
         return data
 
 

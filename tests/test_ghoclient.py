@@ -46,6 +46,10 @@ class TestGHO(unittest.TestCase):
         df = GC.get_dimensions()
         self.assertIsInstance(df, pd.DataFrame)
         self.assertEquals(len(df.columns), 3)
+        
+    def test_get_data(self):
+        GC = ghoclient.ghoclient.GHOSession()
+        df = GC.fetch_data_from_codes(code='WHS3_522')
 
 
 class Test_Index(unittest.TestCase):
