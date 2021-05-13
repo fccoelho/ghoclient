@@ -1,0 +1,10 @@
+name: ghoclient-conda
+
+dependencies:
+    - xmltodict
+    - pandas
+    - requests
+    - inquirer
+    - tox-travis
+    - click
+    - whoosh
