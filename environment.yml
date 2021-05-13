@@ -5,6 +5,6 @@ dependencies:
     - pandas
     - requests
     - inquirer
-    - tox-travis
+    - tox-conda
     - click
     - whoosh
