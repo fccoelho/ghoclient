@@ -3,6 +3,7 @@ GHOclient
 
 .. image:: https://github.com/fccoelho/ghoclient/actions/workflows/python-package.yml/badge.svg
 .. image:: https://github.com/fccoelho/ghoclient/actions/workflows/python-publish.yml/badge.svg
+.. image:: https://github.com/fccoelho/ghoclient/actions/workflows/python-package-conda.yml/badge.svg
 
 
 Introduction
