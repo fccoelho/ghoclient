@@ -1,4 +1,7 @@
-name: ghoclient-conda
+name: base
+channels:
+  - conda-forge
+  - defaults
 
 dependencies:
     - xmltodict
