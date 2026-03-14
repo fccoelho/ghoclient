@@ -71,7 +71,7 @@ Example usage
 
 Basic usage with the GHO class:
 
-.. code-block:: Python
+.. code-block:: python
 
     from ghoclient import GHO
     
@@ -88,7 +88,7 @@ Basic usage with the GHO class:
 
 Legacy usage with index search:
 
-.. code-block:: Python
+.. code-block:: python
 
     import ghoclient
     ghoclient.index.search('smoking')
