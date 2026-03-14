@@ -1,10 +1,29 @@
 GHOclient
 =========
 
-.. image:: https://github.com/fccoelho/ghoclient/actions/workflows/python-package.yml/badge.svg
-.. image:: https://github.com/fccoelho/ghoclient/actions/workflows/python-publish.yml/badge.svg
-.. image:: https://github.com/fccoelho/ghoclient/actions/workflows/python-package-conda.yml/badge.svg
+.. image:: https://img.shields.io/pypi/v/ghoclient.svg
+   :target: https://pypi.org/project/ghoclient/
+   :alt: PyPI version
 
+.. image:: https://img.shields.io/pypi/pyversions/ghoclient.svg
+   :target: https://pypi.org/project/ghoclient/
+   :alt: Python versions
+
+.. image:: https://img.shields.io/pypi/l/ghoclient.svg
+   :target: https://github.com/fccoelho/ghoclient/blob/master/LICENSE
+   :alt: License
+
+.. image:: https://github.com/fccoelho/ghoclient/actions/workflows/python-package.yml/badge.svg
+   :target: https://github.com/fccoelho/ghoclient/actions/workflows/python-package.yml
+   :alt: Tests
+
+.. image:: https://github.com/fccoelho/ghoclient/actions/workflows/python-publish.yml/badge.svg
+   :target: https://github.com/fccoelho/ghoclient/actions/workflows/python-publish.yml
+   :alt: Publish
+
+.. image:: https://readthedocs.org/projects/ghoclient/badge/?version=latest
+   :target: https://ghoclient.readthedocs.io/en/latest/
+   :alt: Documentation
 
 Introduction
 ------------
