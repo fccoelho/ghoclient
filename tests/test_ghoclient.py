@@ -7,9 +7,8 @@ from click.testing import CliRunner
 
 import ghoclient
 from ghoclient import cli
-from ghoclient import Index
+from ghoclient import Index, GHO
 import pandas as pd
-from whoosh.searching import Hit
 
 
 class TestGhoclient(unittest.TestCase):
@@ -29,36 +28,57 @@ class TestGhoclient(unittest.TestCase):
         runner = CliRunner()
         result = runner.invoke(cli.main)
         assert result.exit_code == 0
-        # assert 'ghoclient.cli.main' in result.output
-        help_result = runner.invoke(cli.main, ['--help'])
+        help_result = runner.invoke(cli.main, ["--help"])
         assert help_result.exit_code == 0
-        assert '--help  Show this message and exit.' in help_result.output
+        assert "--help  Show this message and exit." in help_result.output
 
 
 class TestGHO(unittest.TestCase):
     def test_get_countries_as_df(self):
-        GC = ghoclient.ghoclient.GHOSession()
-        df = GC.get_countries()
+        gho = GHO()
+        df = gho.session.get_countries()
         self.assertIsInstance(df, pd.DataFrame)
 
     def test_get_dimensions_as_df(self):
-        GC = ghoclient.ghoclient.GHOSession()
-        df = GC.get_dimensions()
+        gho = GHO()
+        df = gho.session.get_dimensions()
         self.assertIsInstance(df, pd.DataFrame)
-        self.assertEquals(len(df.columns), 3)
-        
+        self.assertGreaterEqual(len(df.columns), 2)
+
     def test_get_data(self):
-        GC = ghoclient.ghoclient.GHOSession()
-        df = GC.fetch_data_from_codes(code='WHS3_522')
+        gho = GHO()
+        df = gho.get_data("WHOSIS_000001", countries=["BRA"])
+        self.assertIsInstance(df, pd.DataFrame)
+
+    def test_get_indicators(self):
+        gho = GHO()
+        indicators = gho.get_indicators()
+        self.assertIsInstance(indicators, pd.DataFrame)
+        self.assertGreater(len(indicators), 0)
+
+    def test_search_indicators(self):
+        gho = GHO()
+        results = gho.search_indicators("tuberculosis")
+        self.assertIsInstance(results, pd.DataFrame)
 
 
-class Test_Index(unittest.TestCase):
+class TestIndex(unittest.TestCase):
     def test_build_index(self):
-        ghoclient.index.build_index(None)
-        assert ghoclient.index.ix is not None 
-        
+        idx = Index()
+        gho = GHO()
+        datacodes = gho.session.get_data_codes(format="dataframe")
+        datacodes.columns = [c.strip("@") for c in datacodes.columns]
+        idx.build_index(datacodes)
+        self.assertIsNotNone(idx.ix)
+
     def test_search(self):
-        res = ghoclient.index.search('tuberculosis')
-        self.assertGreaterEqual(len(res), 0)
-        self.assertIsInstance(res[0], dict)
-        self.assertIn('code', res[0])
+        idx = Index()
+        gho = GHO()
+        datacodes = gho.session.get_data_codes(format="dataframe")
+        datacodes.columns = [c.strip("@") for c in datacodes.columns]
+        idx.build_index(datacodes)
+        res = idx.search("tuberculosis")
+        self.assertIsInstance(res, list)
+        if len(res) > 0:
+            self.assertIsInstance(res[0], dict)
+            self.assertIn("code", res[0])

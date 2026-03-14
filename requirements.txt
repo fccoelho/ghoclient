@@ -1,7 +1,0 @@
-xmltodict
-pandas
-requests
-inquirer
-tox-travis
-click
-whoosh

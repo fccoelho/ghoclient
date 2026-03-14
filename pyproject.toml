@@ -1,0 +1,100 @@
+[project]
+name = "ghoclient"
+version = "1.0.4"
+description = "Python client to the WHO Global Health Observatory"
+readme = "README.rst"
+license = "MIT"
+authors = [
+    {name = "Flávio Codeço Coelho", email = "fccoelho@gmail.com"}
+]
+maintainers = [
+    {name = "Flávio Codeço Coelho", email = "fccoelho@gmail.com"}
+]
+keywords = ["who", "health", "data", "api", "global-health-observatory"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+]
+requires-python = ">=3.8"
+dependencies = [
+    "click>=7.0",
+    "pandas",
+    "requests",
+    "whoosh",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov",
+    "coverage",
+    "flake8",
+    "sphinx",
+    "twine",
+    "build",
+    "bump-my-version",
+]
+
+[project.urls]
+Homepage = "https://github.com/fccoelho/ghoclient"
+Documentation = "https://ghoclient.readthedocs.io"
+Repository = "https://github.com/fccoelho/ghoclient"
+Issues = "https://github.com/fccoelho/ghoclient/issues"
+
+[project.scripts]
+ghoclient = "ghoclient.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["ghoclient"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/ghoclient",
+    "/README.rst",
+    "/LICENSE",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v"
+
+[tool.coverage.run]
+source = ["ghoclient"]
+branch = true
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "if __name__ == .__main__.:",
+]
+
+[tool.bumpversion]
+current_version = "1.0.4"
+commit = true
+tag = true
+
+[[tool.bumpversion.files]]
+filename = "pyproject.toml"
+search = 'version = "{current_version}"'
+replace = 'version = "{new_version}"'
+
+[[tool.bumpversion.files]]
+filename = "ghoclient/__init__.py"
+search = '__version__ = "{current_version}"'
+replace = '__version__ = "{new_version}"'
