@@ -2,11 +2,11 @@ GHOclient
 =========
 
 .. image:: docs/kwar-ai-logo.jpg
-   :target: https://epidbot.kwar-ai.com.br
+   :target: https://kwar-ai.com.br
    :alt: Sponsored by Kwar-AI
    :width: 200
 
-*Sponsored by* `Kwar-AI <https://epidbot.kwar-ai.com.br>`_ *- AI-powered epidemiological intelligence*
+*Sponsored by* `Kwar-AI <https://kwar-ai.com.br>`_ *- AI-powered epidemiological intelligence*
 
 ----
 
