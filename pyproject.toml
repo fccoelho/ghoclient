@@ -1,6 +1,6 @@
 [project]
 name = "ghoclient"
-version = "1.0.4"
+version = "1.0.5"
 description = "Python client to the WHO Global Health Observatory"
 readme = "README.md"
 license = "MIT"
@@ -84,7 +84,7 @@ exclude_lines = [
 ]
 
 [tool.bumpversion]
-current_version = "1.0.4"
+current_version = "1.0.5"
 commit = true
 tag = true
 
