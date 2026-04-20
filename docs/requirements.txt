@@ -8,3 +8,4 @@ whoosh
 ipykernel
 nbsphinx
 myst-parser
+sphinx-md

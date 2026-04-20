@@ -2,7 +2,7 @@
 name = "ghoclient"
 version = "1.0.4"
 description = "Python client to the WHO Global Health Observatory"
-readme = "README.rst"
+readme = "README.md"
 license = "MIT"
 authors = [
     {name = "Flávio Codeço Coelho", email = "fccoelho@gmail.com"}
@@ -65,7 +65,7 @@ packages = ["ghoclient"]
 [tool.hatch.build.targets.sdist]
 include = [
     "/ghoclient",
-    "/README.rst",
+    "/README.md",
     "/LICENSE",
 ]
 
