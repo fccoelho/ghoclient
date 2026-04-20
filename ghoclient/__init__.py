@@ -2,7 +2,7 @@
 
 __author__ = """Flávio Codeço Coelho"""
 __email__ = "fccoelho@gmail.com"
-__version__ = "1.0.5"
+__version__ = "1.1.0"
 
 from .ghoclient import GHOSession, GHO
 from .index import Index
