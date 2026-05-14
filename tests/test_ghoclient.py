@@ -64,15 +64,18 @@ class TestGHO(unittest.TestCase):
 
 class TestIndex(unittest.TestCase):
     def test_build_index(self):
-        idx = Index()
+        idx = Index(index_path="/tmp/test_gho_index.db")
         gho = GHO()
         datacodes = gho.session.get_data_codes(format="dataframe")
         datacodes.columns = [c.strip("@") for c in datacodes.columns]
         idx.build_index(datacodes)
-        self.assertIsNotNone(idx.ix)
+        self.assertIsNotNone(idx.conn)
+        idx.conn.close()
+        import os
+        os.remove("/tmp/test_gho_index.db")
 
     def test_search(self):
-        idx = Index()
+        idx = Index(index_path="/tmp/test_gho_search.db")
         gho = GHO()
         datacodes = gho.session.get_data_codes(format="dataframe")
         datacodes.columns = [c.strip("@") for c in datacodes.columns]
@@ -82,3 +85,6 @@ class TestIndex(unittest.TestCase):
         if len(res) > 0:
             self.assertIsInstance(res[0], dict)
             self.assertIn("code", res[0])
+        idx.conn.close()
+        import os
+        os.remove("/tmp/test_gho_search.db")

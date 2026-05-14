@@ -1,6 +1,6 @@
 [project]
 name = "ghoclient"
-version = "1.1.0"
+version = "1.2.0"
 description = "Python client to the WHO Global Health Observatory"
 readme = "README.md"
 license = "MIT"
@@ -31,7 +31,6 @@ dependencies = [
     "click>=7.0",
     "pandas",
     "requests",
-    "whoosh",
 ]
 
 [project.optional-dependencies]
@@ -84,7 +83,7 @@ exclude_lines = [
 ]
 
 [tool.bumpversion]
-current_version = "1.1.0"
+current_version = "1.2.0"
 commit = true
 tag = true
 

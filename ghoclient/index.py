@@ -1,37 +1,45 @@
-from whoosh.index import create_in, open_dir, exists_in
-from whoosh.qparser import QueryParser
-from whoosh.fields import *
+import sqlite3
 import os
-import copy
-
-schema = Schema(code=ID(stored=True), description=TEXT(stored=True))
 
 
 class Index:
-    def __init__(self, index_path="indexdir"):
+    def __init__(self, index_path="gho_index.db"):
         self.index_path = index_path
-        if not os.path.exists(index_path):
-            os.mkdir(index_path)
-            self.ix = None
-        elif exists_in(index_path):
-            self.ix = open_dir(index_path)
-        else:
-            self.ix = None
+        self.conn = None
+        if os.path.exists(index_path):
+            self.conn = sqlite3.connect(index_path)
+            self.conn.row_factory = sqlite3.Row
+
+    def _ensure_table(self):
+        self.conn.execute(
+            "CREATE VIRTUAL TABLE IF NOT EXISTS indicators USING fts5(code, description)"
+        )
+        self.conn.commit()
 
     def build_index(self, codes):
-        if self.ix is None:
-            self.ix = create_in(self.index_path, schema)
-        writer = self.ix.writer()
+        if self.conn is None:
+            dir_path = os.path.dirname(self.index_path)
+            if dir_path and not os.path.exists(dir_path):
+                os.makedirs(dir_path, exist_ok=True)
+            self.conn = sqlite3.connect(self.index_path)
+            self.conn.row_factory = sqlite3.Row
+        self._ensure_table()
+        self.conn.execute("DELETE FROM indicators")
         for row in codes.itertuples():
-            writer.add_document(code=row.Label, description=row.Display)
-        writer.commit()
+            self.conn.execute(
+                "INSERT INTO indicators(code, description) VALUES (?, ?)",
+                (row.Label, row.Display),
+            )
+        self.conn.commit()
 
     def search(self, query):
-        if self.ix is None:
+        if self.conn is None:
             return []
-        with self.ix.searcher() as searcher:
-            qp = QueryParser("description", schema=self.ix.schema)
-            q = qp.parse(query)
-            results = searcher.search(q, limit=10000)
-            out = [dict(h) for h in results]
-        return out
+        try:
+            cursor = self.conn.execute(
+                "SELECT code, description FROM indicators WHERE indicators MATCH ?",
+                (query,),
+            )
+            return [dict(row) for row in cursor.fetchall()]
+        except sqlite3.OperationalError:
+            return []
